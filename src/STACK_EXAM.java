@@ -22,7 +22,7 @@ public class STACK_EXAM {
         }
     }
 
-    public void push(String productName, int quantity)throws Exception {
+    public void addProduct(String productName, int quantity)throws Exception {
         InventoryManagementStack  node = createNewNode(productName, quantity);
         if (size == 0) {
             top = node;
@@ -33,7 +33,17 @@ public class STACK_EXAM {
                 size++;
     }
 
-        public String pop()throws Exception {
+        public String sellProduct(int quantity)throws Exception {
+        if (quantity == 0) {
+            throw new Exception("Inventory is empty");
+        }
+        String temp = peek();
+        top = top.next;
+                size--;
+                
+        return temp;
+    }
+         public String sellProductName()throws Exception {
         if (size == 0) {
             throw new Exception("Inventory is empty");
         }
@@ -44,7 +54,7 @@ public class STACK_EXAM {
         return temp;
     }
 
-         public void display()throws Exception {
+         public void displayInventory()throws Exception {
         if (size == 0) {
             throw new Exception("Inventory is empty");
         }
@@ -86,16 +96,20 @@ public class STACK_EXAM {
              String element = scanner.nextLine();
              System.out.println("quantity of the product");
              int qnty = scanner.nextInt();
-             stack.push(element,qnty);
+             stack.addProduct(element,qnty);
              break;
              
              case 2:
-             String poppedElement = stack.pop();
-             System.out.println("Sell products: " + poppedElement);
+                  System.out.print("type name of the product: ");
+             String element1 = scanner.nextLine();
+             System.out.println("sell quantity of the product");
+             int qnty1 = scanner.nextInt();
+             stack.sellProduct(qnty1 );
+             
              break;
              
              case 3:
-             stack.display();
+             stack.displayInventory();
              break;
                     
              case 4:
